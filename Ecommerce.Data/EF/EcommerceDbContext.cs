@@ -1,3 +1,4 @@
+using Ecommerce.Data.Configurations;
 using Ecommerce.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,25 @@ namespace Ecommerce.Data.EF
     {
         public EcommerceDbContext(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder moderBuilder)
+        {
+            moderBuilder.ApplyConfiguration(new AppConfigConfiguration());
+            moderBuilder.ApplyConfiguration(new ProductConfiguration());
+            moderBuilder.ApplyConfiguration(new CategoryConfiguration());
+            moderBuilder.ApplyConfiguration(new OrderConfiguration());
+            moderBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+            moderBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
+            moderBuilder.ApplyConfiguration(new ContactConfiguration());
+            moderBuilder.ApplyConfiguration(new LanguageConfiguration());
+            moderBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
+            moderBuilder.ApplyConfiguration(new PromotionConfiguration());
+            moderBuilder.ApplyConfiguration(new TransactionConfiguration());
+
+            moderBuilder.ApplyConfiguration(new ProductCategoryMapConfiguration());
+
+            //base.OnModelCreating(moderBuilder);
         }
 
         public DbSet<Product> Products { get; set; }
@@ -21,5 +41,6 @@ namespace Ecommerce.Data.EF
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<ProductCategoryMap> ProductCategoryMaps { get; set; }
     }
 }

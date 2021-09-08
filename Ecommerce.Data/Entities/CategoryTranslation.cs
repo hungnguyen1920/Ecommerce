@@ -9,5 +9,8 @@ namespace Ecommerce.Data.Entities
         public string SeoTitle { set; get; }
         public string LanguageId { set; get; }
         public string SeoAlias { set; get; }
+        
+        public virtual Category Category { get; set; }
+        public virtual Language Language { get; set; }
     }
 }
