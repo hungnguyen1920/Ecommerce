@@ -1,10 +1,13 @@
+using System;
 using Ecommerce.Data.Configurations;
 using Ecommerce.Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Data.EF
 {
-    public class EcommerceDbContext : DbContext
+    public class EcommerceDbContext : IdentityDbContext<User, Role, Guid>
     {
         public EcommerceDbContext(DbContextOptions options) : base(options)
         {
@@ -23,9 +26,24 @@ namespace Ecommerce.Data.EF
             moderBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             moderBuilder.ApplyConfiguration(new PromotionConfiguration());
             moderBuilder.ApplyConfiguration(new TransactionConfiguration());
+            moderBuilder.ApplyConfiguration(new UserConfiguration());
+            moderBuilder.ApplyConfiguration(new RoleConfiguration());
 
             moderBuilder.ApplyConfiguration(new ProductCategoryMapConfiguration());
 
+            moderBuilder.Entity<IdentityUserClaim<Guid>>()
+                        .ToTable("AppUserClainms");
+            moderBuilder.Entity<IdentityUserRole<Guid>>()
+                        .ToTable("AppUserRoles")
+                        .HasKey(x => new { x.RoleId, x.UserId });
+            moderBuilder.Entity<IdentityUserLogin<Guid>>()
+                        .ToTable("AppUserLogins")
+                        .HasKey(x => x.UserId);
+            moderBuilder.Entity<IdentityRoleClaim<Guid>>()
+                        .ToTable("AppRoleClaims");
+            moderBuilder.Entity<IdentityUserToken<Guid>>()
+                        .ToTable("AppUserTokens")
+                        .HasKey(x => x.UserId);
             //base.OnModelCreating(moderBuilder);
         }
 

@@ -12,10 +12,10 @@ namespace Ecommerce.Data.Entities
         public int Stock { get; set; }
         public int ViewCount { get; set; }
         public DateTime DateCreated { get; set; }
-        public string SeoAlias { get; set; }
-        
+
         public virtual ICollection<ProductCategoryMap> ProductCategoryMaps { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ProductTranslation> ProductTranslations { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
     }
 }
