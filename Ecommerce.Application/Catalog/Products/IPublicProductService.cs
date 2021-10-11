@@ -1,10 +1,11 @@
 using Ecommerce.Application.Catalog.Products.DTOs;
-using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Catalog.Products.DTOs.Public;
+using Ecommerce.Application.CommomDTOs;
 
 namespace Ecommerce.Application.Catalog.Products
 {
     public interface IPublicProductService
     {
-        PageViewModel<ProductViewModel> GetAllByCategoryId(int categoryId, int pageIndex, int pageSize);
+        PageResult<ProductViewModel> GetAllByCategoryId(GetPublicProductPageRequest request);
     }
 }

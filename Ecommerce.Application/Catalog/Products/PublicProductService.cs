@@ -1,11 +1,12 @@
 using Ecommerce.Application.Catalog.Products.DTOs;
-using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Catalog.Products.DTOs.Public;
+using Ecommerce.Application.CommomDTOs;
 
 namespace Ecommerce.Application.Catalog.Products
 {
     public class PublicProductService : IPublicProductService
     {
-        public PageViewModel<ProductViewModel> GetAllByCategoryId(int categoryId, int pageIndex, int pageSize)
+        public PageResult<ProductViewModel> GetAllByCategoryId(GetPublicProductPageRequest request)
         {
             throw new System.NotImplementedException();
         }
